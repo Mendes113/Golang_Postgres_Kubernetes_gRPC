@@ -1,4 +1,4 @@
-CREATE TABLE "Account" (
+CREATE TABLE "accounts" (
   "id" bigserial PRIMARY KEY,
   "owner" varchar NOT NULL,
   "balance" bigint NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE "tranfers" (
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
-CREATE INDEX ON "Account" ("owner");
+CREATE INDEX ON "Accounts" ("owner");
 
 CREATE INDEX ON "entries" ("account_id");
 
@@ -37,6 +37,6 @@ COMMENT ON COLUMN "tranfers"."amount" IS 'must be positive';
 
 ALTER TABLE "entries" ADD FOREIGN KEY ("account_id") REFERENCES "Account" ("id");
 
-ALTER TABLE "tranfers" ADD FOREIGN KEY ("from_account_id") REFERENCES "Account" ("id");
+ALTER TABLE "tranfers" ADD FOREIGN KEY ("from_account_id") REFERENCES "Accounts" ("id");
 
-ALTER TABLE "tranfers" ADD FOREIGN KEY ("to_from_account_id") REFERENCES "Account" ("id");
+ALTER TABLE "tranfers" ADD FOREIGN KEY ("to_from_account_id") REFERENCES "Accounts" ("id");
